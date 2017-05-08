@@ -1,0 +1,1 @@
+hdfs dfs -mkdir -p basic-page-rank && hdfs dfs -put ./input/* basic-page-rank/
