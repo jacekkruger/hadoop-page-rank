@@ -1,0 +1,5 @@
+hadoop jar ./target/hadoop-compact-page-rank-1.0-SNAPSHOT.jar com.kruger.pagerank.input.RelationsToCompactJob \
+-Dpagerank.data.path=compact-page-rank/example1 \
+-D.mapreduce.input.fileinputformat.split.maxsize=20 \
+-Dmapreduce.ifile.readahead=false \
+"$@"

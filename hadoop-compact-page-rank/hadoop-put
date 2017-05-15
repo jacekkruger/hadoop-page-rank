@@ -1,0 +1,1 @@
+hdfs dfs -mkdir -p compact-page-rank && hdfs dfs -put ./input/* compact-page-rank/
