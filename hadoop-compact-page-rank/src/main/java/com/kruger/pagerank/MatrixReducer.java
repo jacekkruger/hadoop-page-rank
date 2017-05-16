@@ -12,17 +12,8 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 
 	private final static Logger log = Logger.getLogger(MatrixReducer.class);
 
-	double randomJump;
-
-	@Override
-	protected void setup(Context context) throws IOException, InterruptedException {
-		randomJump = context.getConfiguration().getDouble(PageRank.RANDOM_JUMP, 0.8);
-		log.info("Configured random jump chance to " + randomJump);
-	}
-
 	@Override
 	protected void reduce(Text keyin, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-
 		long degree = 0;
 		Set<Long> destinations = new HashSet<>();
 		double vectorElement = Double.NaN;
@@ -57,7 +48,7 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 			}
 		}
 
-		if (vectorElement == Double.NaN) {
+		if (Double.isNaN(vectorElement)) {
 			log.info("No vector element for index " + keyin);
 			return;
 		}
@@ -67,7 +58,7 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 			return;
 		}
 
-		double value = randomJump * vectorElement / degree;
+		double value = vectorElement / degree;
 		Text valueout = new Text(String.valueOf(value));
 
 		for (Long destination : destinations) {

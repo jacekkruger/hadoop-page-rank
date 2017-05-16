@@ -17,17 +17,17 @@ import org.apache.hadoop.util.GenericOptionsParser;
 
 import com.kruger.pagerank.input.RelationsToCompactJob;
 import com.kruger.pagerank.normalize.NormalizeVectorJob;
-import com.kruger.pagerank.sumvector.SumVectorElementsJob;
 
 public class PageRank {
 
 	public static final String DATA_PATH = "pagerank.data.path";
-	public static final String RANDOM_JUMP = "pagerank.randomjump";
+	public static final String NODES = "pagerank.nodes";
+	public static final String BETA = "pagerank.beta";
 	public static final String ITERATION_COUNT = "pagerank.iteration.count";
 	public static final String ITERATION_PREVIOUS = "pagerank.iteration.previous";
 	public static final String ITERATION_CURRENT = "pagerank.iteration.current";
 
-	public static final String REQUIRED_PARAMS[] = { DATA_PATH, RANDOM_JUMP, ITERATION_COUNT };
+	public static final String REQUIRED_PARAMS[] = { DATA_PATH, NODES, BETA, ITERATION_COUNT };
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = createConfigurationAndValidate(args, REQUIRED_PARAMS);
@@ -42,8 +42,6 @@ public class PageRank {
 			conf.set(ITERATION_CURRENT, String.valueOf(i + 1));
 			Job coreJob = createJob(conf);
 			runAssertSuccess(coreJob, () -> "Core job failed. Iteration " + conf.get(ITERATION_CURRENT));
-			Job sumJob = SumVectorElementsJob.createJob(conf);
-			runAssertSuccess(sumJob, () -> "Sum job failed. Iteration " + conf.get(ITERATION_CURRENT));
 			Job normalizeJob = NormalizeVectorJob.createJob(conf);
 			runAssertSuccess(normalizeJob, () -> "Normalize job failed. Iteration " + conf.get(ITERATION_CURRENT));
 		}

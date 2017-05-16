@@ -1,8 +1,13 @@
+if test $# -lt 4
+then echo "hadoop-run <data path> <nodes> <beta> <iterations>"
+exit 1
+fi
+
 hadoop jar ./target/hadoop-compact-page-rank-1.0-SNAPSHOT.jar com.kruger.pagerank.PageRank \
--Dpagerank.data.path=compact-page-rank/example1 \
--Dpagerank.randomjump=0.8 \
--Dpagerank.iteration.count=50 \
+"-Dpagerank.data.path=$1" \
+"-Dpagerank.nodes=$2" \
+"-Dpagerank.beta=$3" \
+"-Dpagerank.iteration.count=$4" \
 -D.mapreduce.job.reduces=3 \
 -D.mapreduce.input.fileinputformat.split.maxsize=20 \
 -Dmapreduce.ifile.readahead=false \
-"$@"
