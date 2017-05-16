@@ -34,7 +34,7 @@ public class NormalizeVectorReducer extends Reducer<Text, Text, Text, Text> {
 
 		String valueout = String.valueOf(value);
 
-		log.info("Emmiting (" + key + ") -> (" + valueout + ")");
+		log.debug("Emmiting (" + key + ") -> (" + valueout + ")");
 
 		context.write(key, new Text(valueout));
 	}

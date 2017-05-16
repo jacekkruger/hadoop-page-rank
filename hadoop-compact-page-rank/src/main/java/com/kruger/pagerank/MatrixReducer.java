@@ -38,7 +38,7 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 				}
 			} else {
 				// vector element
-				log.info("Processing vector element " + keyin + " with value " + value);
+				log.debug("Processing vector element " + keyin + " with value " + value);
 
 				if (!Double.isNaN(vectorElement)) {
 					throw new IllegalStateException("Multiple vector elements");
@@ -49,12 +49,12 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 		}
 
 		if (Double.isNaN(vectorElement)) {
-			log.info("No vector element for index " + keyin);
+			log.debug("No vector element for index " + keyin);
 			return;
 		}
 
 		if (degree == 0) {
-			log.info("No matrix element for index " + keyin);
+			log.debug("No matrix element for index " + keyin);
 			return;
 		}
 
@@ -63,7 +63,7 @@ public class MatrixReducer extends Reducer<Text, Text, Text, Text> {
 
 		for (Long destination : destinations) {
 			Text keyout = new Text(destination.toString());
-			log.info("Emmiting (" + keyin + ") -> (" + keyout + ", " + valueout + ")");
+			log.debug("Emmiting (" + keyin + ") -> (" + keyout + ", " + valueout + ")");
 			context.write(keyout, valueout);
 		}
 	}
