@@ -18,6 +18,7 @@
 	<modules>
 		<module>hadoop-basic-page-rank</module>
 		<module>hadoop-compact-page-rank</module>
+		<module>hadoop-topic-specific-page-rank</module>
 	</modules>
 
 	<build>

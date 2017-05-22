@@ -1,0 +1,1 @@
+hdfs dfs -mkdir -p topic-specific-page-rank && hdfs dfs -put ./input/* topic-specific-page-rank/

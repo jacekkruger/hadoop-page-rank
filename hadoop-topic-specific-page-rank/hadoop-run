@@ -1,0 +1,13 @@
+if test $# -lt 4
+then echo "hadoop-run <data path> <topics> <beta> <iterations>"
+exit 1
+fi
+
+hadoop jar ./target/hadoop-topic-specific-page-rank-1.0-SNAPSHOT.jar com.kruger.pagerank.PageRank \
+"-Dpagerank.data.path=$1" \
+"-Dpagerank.topics=$2" \
+"-Dpagerank.beta=$3" \
+"-Dpagerank.iteration.count=$4" \
+-D.mapreduce.job.reduces=3 \
+-D.mapreduce.input.fileinputformat.split.maxsize=20 \
+-Dmapreduce.ifile.readahead=false \
